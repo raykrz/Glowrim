@@ -48,7 +48,27 @@ Pick a preset, or choose **Custom** to build your own look. The menu bar menu sw
 
 ## Install
 
-Requires **macOS 14.2 or later** and the Command Line Tools (`xcode-select --install`). Xcode isn't needed.
+### Download (no developer tools needed)
+
+1. Download **`Glowrim-0.1.0.zip`** from the [latest release](https://github.com/raykrz/Glowrim/releases/latest) and unzip it.
+2. Drag **Glowrim.app** to your Applications folder and open it. It lives in the menu bar (look for the rays icon).
+
+It runs natively on Apple Silicon and Intel Macs, on **macOS 14.2 or later**.
+
+**First launch.** Glowrim isn't notarized by Apple (that needs a paid developer account), so macOS blocks the first open of a downloaded copy. Allow it once:
+
+- Try to open it, then go to **System Settings → Privacy & Security**, scroll to the message about Glowrim and click **Open Anyway**.
+- Or, in Terminal, clear the download flag and open it normally:
+
+  ```sh
+  xattr -dr com.apple.quarantine /Applications/Glowrim.app
+  ```
+
+The source is all here, and you can build it yourself if you'd rather not trust a binary.
+
+### Build from source
+
+Needs the Command Line Tools (`xcode-select --install`). Xcode isn't needed.
 
 ```sh
 git clone https://github.com/raykrz/Glowrim.git
@@ -58,7 +78,7 @@ chmod +x build.sh
 open Glowrim.app
 ```
 
-Optionally move `Glowrim.app` to `/Applications`, then turn on **Launch at login** in Settings.
+`./package.sh` builds a universal app and zips it into `dist/` for a release. Once Glowrim is in `/Applications`, turn on **Launch at login** in Settings.
 
 ## Permissions
 

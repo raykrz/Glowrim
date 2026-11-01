@@ -6,8 +6,19 @@ cd "$(dirname "$0")"
 NAME="Glowrim"
 APP="$NAME.app"
 
-swift build -c release
-BIN="$(swift build -c release --show-bin-path)/$NAME"
+if [ "${UNIVERSAL:-0}" = "1" ]; then
+    # One app that runs natively on both Apple Silicon and Intel Macs.
+    BINS=()
+    for arch in arm64 x86_64; do
+        swift build -c release --triple "$arch-apple-macosx14.2"
+        BINS+=("$(swift build -c release --triple "$arch-apple-macosx14.2" --show-bin-path)/$NAME")
+    done
+    BIN=".build/$NAME-universal"
+    lipo -create "${BINS[@]}" -output "$BIN"
+else
+    swift build -c release
+    BIN="$(swift build -c release --show-bin-path)/$NAME"
+fi
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
