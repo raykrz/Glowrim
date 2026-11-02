@@ -259,16 +259,33 @@ app.whenReady().then(() => {
 app.on('before-quit', () => store && store.flush());
 
 if (SELFTEST) {
-  app.whenReady().then(() => setTimeout(() => {
+  // Boots, waits a few seconds, writes a report plus screenshots of what was drawn, and quits.
+  // Used by CI to check the packaged app on a real Windows machine.
+  app.whenReady().then(() => setTimeout(async () => {
+    const fs = require('fs');
+    const dir = process.env.GLOWRIM_SELFTEST_DIR || process.cwd();
+    fs.mkdirSync(dir, { recursive: true });
+    const shot = async (win, name) => {
+      try { fs.writeFileSync(path.join(dir, name), (await win.webContents.capturePage()).toPNG()); } catch (e) { return String(e); }
+      return 'ok';
+    };
+    const first = [...overlays.values()][0];
     const report = {
+      platform: process.platform,
+      electron: process.versions.electron,
       overlays: overlays.size,
       overlayVisible: [...overlays.values()].map((w) => w.isVisible()),
       settingsWindow: !!settingsWin && !settingsWin.isDestroyed(),
       tray: !!tray,
       captureWindow: !!captureWin && !captureWin.isDestroyed(),
       mode: settings().mode,
+      status: statusText,
+      displays: screen.getAllDisplays().map((d) => `${d.bounds.width}x${d.bounds.height}@${d.scaleFactor}`),
     };
+    if (first) report.overlayShot = await shot(first, 'overlay.png');
+    if (settingsWin && !settingsWin.isDestroyed()) report.settingsShot = await shot(settingsWin, 'settings.png');
+    fs.writeFileSync(path.join(dir, 'selftest.json'), JSON.stringify(report, null, 2));
     console.log('SELFTEST ' + JSON.stringify(report));
     app.exit(0);
-  }, 6000));
+  }, 8000));
 }
