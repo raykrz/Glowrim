@@ -83,7 +83,7 @@ open Glowrim.app
 
 ### Windows (beta)
 
-1. Download **`Glowrim-Setup-<version>.exe`** from the [Windows release](https://github.com/raykrz/Glowrim/releases?q=windows) and run it. There's no admin prompt; it installs for your user.
+1. Download **`Glowrim-Setup-<version>.exe`** from the [Windows release](https://github.com/raykrz/Glowrim/releases/tag/windows-v0.1.0) and run it. There's no admin prompt; it installs for your user.
 2. Glowrim opens its settings window on first launch and then lives in the **system tray**. On Windows 11 the icon may hide behind the **^** arrow; drag it onto the taskbar to keep it visible.
 
 Windows 10 (2004) or later, 64-bit. The installer isn't code-signed, so SmartScreen may say "Windows protected your PC": click **More info → Run anyway**.
