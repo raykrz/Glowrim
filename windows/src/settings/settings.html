@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+<title>Glowrim Settings</title>
+<link rel="stylesheet" href="settings.css">
+</head>
+<body>
+<main id="app">
+  <header>
+    <div class="logo"><svg viewBox="0 0 24 24"><g stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></g></svg></div>
+    <div class="title">
+      <h1>Glowrim</h1>
+      <div id="status" class="status" hidden><i></i><span></span></div>
+    </div>
+    <label class="switch"><span>Enabled</span><input type="checkbox" id="enabled"><b></b></label>
+  </header>
+
+  <section>
+    <h2>Movie presets</h2><p class="sub">The rim takes its colors from what's on screen.</p>
+    <div class="grid" id="movie-presets"></div>
+  </section>
+  <section>
+    <h2>Music presets</h2><p class="sub">The rim moves with whatever you're playing.</p>
+    <div class="grid" id="music-presets"></div>
+  </section>
+
+  <section>
+    <h2>Custom</h2><p class="sub">Pick the animation, colors and more yourself.</p>
+    <button class="card custom-card" id="custom-card">
+      <svg viewBox="0 0 24 24" class="ico"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <span><b>Build your own</b><small id="custom-hint">Tap to fine-tune everything</small></span>
+      <svg class="tick" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#0A0604" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <div class="panel" id="custom-panel" hidden>
+      <h3>Animation</h3>
+      <div class="chips" id="modes"></div>
+      <div class="row" id="row-comets"><label>Comets</label><div class="seg" id="comets"></div></div>
+      <p class="hint" id="movie-hint">Movie mode reads a tiny capture of your screen. It's never saved or sent anywhere.</p>
+
+      <h3>Look</h3>
+      <div class="row"><label>Style</label><div class="seg" id="style"></div></div>
+      <div class="row"><label>Wavy edge</label><label class="switch"><input type="checkbox" id="wavy"><b></b></label><span class="note">The inner edge ripples with the beat</span></div>
+      <div class="row"><label>Thickness</label><input type="range" id="thickness" min="2" max="30" step="1"><output id="thickness-out"></output></div>
+      <div class="row"><label>Glow</label><input type="range" id="glow" min="0" max="1" step="0.01"><output id="glow-out"></output></div>
+      <div class="row" id="row-sens"><label>Beat sensitivity</label><input type="range" id="sensitivity" min="0" max="1" step="0.01"><output id="sensitivity-out"></output></div>
+
+      <div id="colors">
+        <h3>Colors</h3>
+        <div class="row"><label>Your colors</label>
+          <label class="colorpick"><input type="color" id="primary"><span>Primary</span></label>
+          <label class="colorpick"><input type="color" id="secondary"><span>Secondary</span></label>
+        </div>
+        <div class="row"><label>Palettes</label><div class="palettes" id="palettes"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>General</h2><p class="sub">Where and when the rim shows up.</p>
+    <div class="panel">
+      <label class="switch line"><span>Show on all displays</span><input type="checkbox" id="allDisplays"><b></b></label>
+      <label class="switch line"><span>Launch at login</span><input type="checkbox" id="launchAtLogin"><b></b></label>
+      <hr>
+      <button class="btn" id="reset">Reset everything to defaults</button>
+    </div>
+  </section>
+</main>
+<script src="settings.js"></script>
+</body>
+</html>

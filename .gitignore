@@ -4,3 +4,6 @@ Glowrim.app/
 *.xcodeproj
 .swiftpm/
 dist/
+windows/node_modules/
+windows/dist/
+windows/test/out/

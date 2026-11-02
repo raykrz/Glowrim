@@ -1,0 +1,49 @@
+{
+  "name": "glowrim",
+  "version": "0.1.0",
+  "description": "Rim lighting for your screen that follows what you watch and hear.",
+  "main": "src/main.js",
+  "author": "raykrz",
+  "license": "MIT",
+  "homepage": "https://github.com/raykrz/Glowrim",
+  "scripts": {
+    "start": "electron .",
+    "demo": "electron . --demo",
+    "test:render": "electron test/render-test.js",
+    "dist": "electron-builder --win nsis --x64 --publish never"
+  },
+  "build": {
+    "appId": "dev.glowrim.app",
+    "productName": "Glowrim",
+    "copyright": "Copyright (c) 2026 raykrz",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "Glowrim-Setup-${version}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.2.1",
+    "electron-builder": "^26.18.0"
+  }
+}
