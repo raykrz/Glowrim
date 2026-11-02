@@ -88,7 +88,7 @@ open Glowrim.app
 
 Windows 10 (2004) or later, 64-bit. The installer isn't code-signed, so SmartScreen may say "Windows protected your PC": click **More info → Run anyway**.
 
-The Windows version is a separate app built with Electron, in [`windows/`](windows). It has the same presets, comets, wavy edge, Music sync and Movie mode. It is **a beta, and not yet tested on a real Windows machine** beyond building it, so expect rough edges and please [open an issue](https://github.com/raykrz/Glowrim/issues). Differences from the Mac version:
+The Windows version is a separate app built with Electron, in [`windows/`](windows). It has the same presets, comets, wavy edge, Music sync and Movie mode. It is **a beta**: every build is launched on GitHub's Windows machines to check that the overlay, tray, settings window and audio capture start, but it hasn't had much time on real PCs with real screens and sound, so expect rough edges and please [open an issue](https://github.com/raykrz/Glowrim/issues). Differences from the Mac version:
 
 - **No album-art colors.** Windows presets use their own colors, and you can pick any in Custom.
 - **No notch handling** (Windows laptops don't have one).
